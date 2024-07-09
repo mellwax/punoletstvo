@@ -6,13 +6,16 @@
 
     <nav>
       <router-link to="/upload" class="nav-elem">
-        <span >
+        <span>
           Upload
         </span>
       </router-link>
       <dark-mode-button class="nav-elem">
 
       </dark-mode-button>
+<!--      <language-menu>
+
+      </language-menu>-->
     </nav>
   </header>
 </template>
@@ -61,9 +64,21 @@ header a {
     border-bottom: 2px solid var(--light-color);
 }
 
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+@media (max-width: 700px) {
+    nav {
+        gap: 1rem;
+    }
+}
+
 .nav-elem {
     font-size: 2rem;
-    margin: 0 0.5em;
 }
 
 .nav-elem:hover {
@@ -74,7 +89,7 @@ header a {
     border-bottom: 2px solid var(--light-color);
 }
 
-@media(max-width: 700px) {
+@media (max-width: 700px) {
     header {
         height: 2rem;
         margin: 0.5rem 0.5rem 1rem;

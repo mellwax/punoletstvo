@@ -9,4 +9,6 @@ const app = createApp(App);
 app.use(pinia);
 app.use(router);
 
+app.config.globalProperties.$lang = 'en';
+
 app.mount('#app');
