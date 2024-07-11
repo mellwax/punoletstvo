@@ -87,8 +87,6 @@ nav:last-child {
     }
 }
 
-
-
 .nav-elem {
     font-size: 2rem;
 }

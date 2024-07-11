@@ -1,5 +1,7 @@
 <template>
-    <span class="page-title">Photos and Videos</span>
+    <span class="page-title">
+      {{ this.lang.title[this.languageStore.selectedLanguage] }} 🎉
+    </span>
 
     <light-gallery class="gallery">
       <a href="https://imgr1.auto-motor-und-sport.de/Porsche-911-GT3-RS-169FullWidth-c8d83bf5-2006007.jpg"
@@ -29,6 +31,8 @@
 import LightGallery from 'lightgallery/vue';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
+import {mapStores} from "pinia";
+import {useLanguageStore} from "@/store";
 
 export default {
     name: 'HomePage',
@@ -37,8 +41,18 @@ export default {
     },
     data() {
         return {
-            plugins: [lgThumbnail, lgZoom]
+            plugins: [lgThumbnail, lgZoom],
+            lang: {
+                title: {
+                    en: 'Relive our unforgettable party!',
+                    de: 'Erlebe unsere unvergessliche Party noch einmal!',
+                    rs: 'Doživi još jednom našu nezaboravnu žurku!'
+                }
+            }
         }
+    },
+    computed: {
+        languageStore: mapStores(useLanguageStore).languageStore
     }
 }
 

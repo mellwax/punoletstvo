@@ -6,7 +6,7 @@
         &times;
       </button>
     </div>
-    <span>
+    <span v-if="false">
         {{ name }}
       </span>
   </div>
@@ -28,7 +28,7 @@ export default {
         }
     },
     computed: {
-        uploadStore: mapStores(useUploadStore).uploadStore
+        uploadStore: mapStores(useUploadStore).uploadStore,
     }
 }
 </script>
@@ -43,10 +43,12 @@ export default {
 .inner-container {
     max-width: 100px;
     position: relative;
+    margin: 0.2em 0.5em;
 }
 
 .upload-preview {
     max-width: 100px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 .file-remove {
@@ -55,6 +57,7 @@ export default {
     padding: 0;
     margin: 0;
     border-radius: 50%;
+    font-size: 1rem;
 
     position: absolute;
     top: -0.75em;
@@ -71,13 +74,14 @@ export default {
 }
 
 span {
-    padding: 0.5rem;
     text-align: center;
+    font-size: 1rem;
+    padding: 0.2rem;
 }
 
 @media (max-width: 700px) {
     span {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
     }
 }
 

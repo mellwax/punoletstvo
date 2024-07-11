@@ -1,5 +1,7 @@
 <template>
-  <span class="page-title">Share your memories with us! 🥳</span>
+  <span class="page-title">
+    {{ this.lang.title[this.languageStore.selectedLanguage] }} 🥳
+  </span>
 
   <form class="upload-form" id="upload-form" @submit.prevent="upload">
     <input type="file" id="file-upload" accept="image/*, video/*" multiple style="display: none" @change="updateFiles">
@@ -14,7 +16,7 @@
 
       <div class="upload-container-element">
       <span class="upload-text">
-        Click here to upload your photos and videos!
+        {{ this.lang.uploadText[this.languageStore.selectedLanguage] }}
       </span>
       </div>
 
@@ -34,11 +36,11 @@
       </div>
 
       <button id="add-files-btn" @click="openUpload">
-        Add photos/videos
+        {{ this.lang.addButton[this.languageStore.selectedLanguage] }}
       </button>
     </div>
 
-    <button type="submit" id="upload-button">
+    <button type="submit" id="upload-button" v-if="uploadStore.files.length > 0">
       Upload
     </button>
 
@@ -48,7 +50,7 @@
 <script>
 import UploadPreviewItem from "@/components/UploadPreviewItem.vue";
 import {mapStores} from "pinia";
-import {useUploadStore} from "@/store";
+import {useLanguageStore, useUploadStore} from "@/store";
 
 export default {
     name: 'UploadPage',
@@ -56,6 +58,23 @@ export default {
     data() {
         return {
             status: 'selecting',
+            lang: {
+                title: {
+                    en: 'Share your memories with us!',
+                    de: 'Teile deine Erinnerungen mit uns!',
+                    rs: 'Podeli tvoje uspomene sa nama!'
+                },
+                uploadText: {
+                    en: 'Click here to upload your photos and videos!',
+                    de: 'Drück hier um deine Fotos und Videos hochzuladen!',
+                    rs: 'Pritisni ovde da bi podelio svoje slike i snimke!'
+                },
+                addButton: {
+                    en: 'Add photos/videos',
+                    de: 'Fotos/Videos hinzufügen',
+                    rs: 'Dodaj slike/snimke'
+                }
+            }
         }
     },
     methods: {
@@ -83,7 +102,8 @@ export default {
         },
     },
     computed: {
-        uploadStore: mapStores(useUploadStore).uploadStore
+        uploadStore: mapStores(useUploadStore).uploadStore,
+        languageStore: mapStores(useLanguageStore).languageStore
     }
 }
 </script>
@@ -169,9 +189,14 @@ form {
 
 #add-files-btn {
     font-size: 1rem;
-    height: 2.5rem;
-    width: 12rem;
     margin-top: 1.5rem;
+    padding: 0.5em 1.5em;
+}
+
+@media (max-width: 700px) {
+    #add-files-btn {
+        font-size: 0.8rem;
+    }
 }
 
 </style>

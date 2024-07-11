@@ -1,20 +1,20 @@
 import { defineStore } from 'pinia';
 
-export const useLanguageStore = defineStore('languages', {
+export const useLanguageStore = defineStore('language', {
     state: () => ({
         selectedLanguage: 'en',
         availableLanguages: ['en', 'de', 'rs'],
-
     }),
-    getters: {
-        currLang: state => state.selectedLanguage,
-    },
     actions: {
         changeLanguage(lang) {
             if (!this.availableLanguages.includes(lang)) return;
 
             this.selectedLanguage = lang;
             document.querySelector('html').setAttribute('lang', lang);
+            localStorage.setItem('lang', lang);
+        },
+        loadLanguage() {
+            this.selectedLanguage = localStorage.getItem('lang') ?? 'en';
         }
     }
 });

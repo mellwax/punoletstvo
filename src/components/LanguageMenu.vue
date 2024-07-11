@@ -1,5 +1,5 @@
 <template>
-  <select>
+  <select id="lang-select" @change="changeLang($event.target.value)">
     <option value="en">
       🇬🇧
     </option>
@@ -13,8 +13,22 @@
 </template>
 
 <script>
+import {mapStores} from "pinia";
+import {useLanguageStore} from "@/store";
+
 export default {
     name: 'LanguageMenu',
+    computed: {
+        languageStore: mapStores(useLanguageStore).languageStore,
+    },
+    methods: {
+        changeLang(lang) {
+          this.languageStore.changeLanguage(lang);
+        }
+    },
+    mounted() {
+        document.getElementById('lang-select').value = this.languageStore.selectedLanguage;
+    }
 }
 </script>
 

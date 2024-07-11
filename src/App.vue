@@ -2,17 +2,10 @@
   <app-header
       :title="this.title"
   >
-
   </app-header>
 
   <main>
-<!--    <span>{{this.selectedLanguage}}</span>
-    <button @click="changeLanguage">
-      Change Lang
-    </button>-->
-    <router-view>
-
-    </router-view>
+    <router-view></router-view>
   </main>
 
 </template>
@@ -20,27 +13,19 @@
 <script>
 import AppHeader from "@/components/AppHeader.vue";
 import {RouterView} from "vue-router";
-import {mapStores} from "pinia";
 import {useLanguageStore} from "@/store";
 
 export default {
     name: 'App',
     components: {AppHeader, RouterView},
-    computed: {
-        languagesStore: mapStores(useLanguageStore).languagesStore,
-        selectedLanguage() {
-            return this.languagesStore.currLang;
-        }
-    },
     data() {
         return {
             title: 'Andijevo Punoletstvo'
         }
     },
-    methods: {
-        changeLanguage() {
-            this.languagesStore.changeLanguage('de');
-        }
+    beforeCreate() {
+      const languageStore = useLanguageStore();
+      languageStore.loadLanguage();
     }
 }
 </script>
