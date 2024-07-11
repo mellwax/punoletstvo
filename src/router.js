@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import HomePage from "@/pages/HomePage.vue";
 import UploadPage from "@/pages/UploadPage.vue";
+import TestPage from "@/pages/TestPage.vue";
 
 const routes = [
     {
@@ -10,6 +11,10 @@ const routes = [
     {
         path: '/upload',
         component: UploadPage
+    },
+    {
+        path: '/test',
+        component: TestPage
     },
     {
         path: '/:pathMatch(.*)*',

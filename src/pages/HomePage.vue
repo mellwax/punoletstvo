@@ -1,5 +1,5 @@
 <template>
-    <h1>Photos and Videos</h1>
+    <span class="page-title">Photos and Videos</span>
 
     <light-gallery class="gallery">
       <a href="https://imgr1.auto-motor-und-sport.de/Porsche-911-GT3-RS-169FullWidth-c8d83bf5-2006007.jpg"
@@ -49,6 +49,10 @@ export default {
 @import "lightgallery/css/lg-thumbnail.css";
 @import "lightgallery/css/lg-zoom.css";
 
+h1 {
+    margin-bottom: 3rem;
+}
+
 .gallery {
     width: 100%;
     display: grid;
@@ -56,6 +60,7 @@ export default {
     grid-gap: 50px;
     justify-content: center;
     align-items: center;
+    margin: 1rem 0;
 }
 
 .gallery-item {

@@ -3,6 +3,45 @@ import { defineStore } from 'pinia';
 export const useLanguageStore = defineStore('languages', {
     state: () => ({
         selectedLanguage: 'en',
+        availableLanguages: ['en', 'de', 'rs'],
 
-    })
+    }),
+    getters: {
+        currLang: state => state.selectedLanguage,
+    },
+    actions: {
+        changeLanguage(lang) {
+            if (!this.availableLanguages.includes(lang)) return;
+
+            this.selectedLanguage = lang;
+            document.querySelector('html').setAttribute('lang', lang);
+        }
+    }
+});
+
+export const useUploadStore = defineStore('upload', {
+    state: () => ({
+        files: [],
+        contId: 0
+    }),
+    actions: {
+        updateFiles(file) {
+            if (!file) return;
+
+            this.files.push({
+                id: this.contId++,
+                name: file.name ?? `no-name-${this.id}`,
+                src: URL.createObjectURL(file),
+            });
+            console.log(this.files)
+        },
+        remove(id) {
+            for (let i = 0; i < this.files.length; i++) {
+                if (this.files[i].id === id) {
+                    this.files.splice(i, 1);
+                    return;
+                }
+            }
+        }
+    }
 });

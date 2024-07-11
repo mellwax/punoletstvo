@@ -10,22 +10,22 @@
           Upload
         </span>
       </router-link>
-      <dark-mode-button class="nav-elem">
 
-      </dark-mode-button>
-<!--      <language-menu>
+      <language-menu></language-menu>
 
-      </language-menu>-->
+      <dark-mode-button class="nav-elem"></dark-mode-button>
+
     </nav>
   </header>
 </template>
 
 <script>
 import DarkModeButton from "@/components/DarkModeButton.vue";
+import LanguageMenu from "@/components/LanguageMenu.vue";
 
 export default {
     name: 'AppHeader',
-    components: {DarkModeButton},
+    components: {LanguageMenu, DarkModeButton},
     props: {
         title: String,
     }
@@ -35,7 +35,7 @@ export default {
 <style>
 header {
     /*border: 1px solid red;*/
-    margin: 1rem 1rem 2rem;
+    margin: 1rem 1rem 0;
     padding: 1em;
     height: 3rem;
     display: flex;
@@ -49,6 +49,7 @@ header a {
 }
 
 .header-title {
+    text-align: center;
     font-family: "Noto Serif Display", serif;
     font-weight: 450;
     text-decoration: none;
@@ -69,13 +70,24 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    padding-top: 0.25rem;
+}
+
+nav:last-child {
+    gap: 1rem;
 }
 
 @media (max-width: 700px) {
     nav {
         gap: 1rem;
     }
+
+    nav:last-child {
+        gap: 0.5rem;
+    }
 }
+
+
 
 .nav-elem {
     font-size: 2rem;
@@ -92,7 +104,7 @@ nav {
 @media (max-width: 700px) {
     header {
         height: 2rem;
-        margin: 0.5rem 0.5rem 1rem;
+        margin: 0.5rem 0.5rem 0;
         padding: 0.5em;
     }
 

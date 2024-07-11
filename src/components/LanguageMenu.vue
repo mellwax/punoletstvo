@@ -1,13 +1,13 @@
 <template>
   <select>
-    <option>
+    <option value="en">
       🇬🇧
     </option>
-    <option>
-      🇩🇪
-    </option>
-    <option>
+    <option value="rs">
       🇷🇸
+    </option>
+    <option value="de">
+      🇩🇪
     </option>
   </select>
 </template>
@@ -26,11 +26,15 @@ select {
     background-color: inherit;
 }
 
+@media (max-width: 700px) {
+    select {
+        height: 2rem;
+        font-size: 100%;
+    }
+}
+
 select:active {
     border: none;
 }
 
-option {
-    line-height: 100%;
-}
 </style>
