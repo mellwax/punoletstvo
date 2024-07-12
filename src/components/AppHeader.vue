@@ -5,10 +5,11 @@
     </router-link>
 
     <nav>
+      <router-link to="/media-test" class="nav-elem">
+        Test
+      </router-link>
       <router-link to="/upload" class="nav-elem">
-        <span>
-          Upload
-        </span>
+        Upload
       </router-link>
 
       <language-menu></language-menu>

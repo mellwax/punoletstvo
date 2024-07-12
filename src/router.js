@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import HomePage from "@/pages/HomePage.vue";
 import UploadPage from "@/pages/UploadPage.vue";
-import TestPage from "@/pages/TestPage.vue";
+import MediaTest from "@/pages/MediaTest.vue";
 
 const routes = [
     {
@@ -13,8 +13,8 @@ const routes = [
         component: UploadPage
     },
     {
-        path: '/test',
-        component: TestPage
+        path: '/media-test',
+        component: MediaTest
     },
     {
         path: '/:pathMatch(.*)*',

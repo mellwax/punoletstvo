@@ -82,8 +82,7 @@ export default {
             document.getElementById('file-upload').click();
         },
         upload() {
-            const upload = document.getElementById('file-upload');
-            console.log(upload.files);
+            console.log('No upload yet :(');
         },
         updateFiles() {
             if (!document) return;
@@ -97,8 +96,6 @@ export default {
             for (const file of uploadFiles) {
                 this.uploadStore.updateFiles(file);
             }
-
-            console.log(this.uploadStore.files);
         },
     },
     computed: {

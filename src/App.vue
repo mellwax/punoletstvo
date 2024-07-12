@@ -82,7 +82,7 @@ button {
     background-color: var(--dark-color);
     color: var(--light-color);
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: all 0.3s;
 }
 
 .dark button {
@@ -91,7 +91,7 @@ button {
 }
 
 button:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
 }
 
 button:hover {

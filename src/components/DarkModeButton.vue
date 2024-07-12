@@ -77,6 +77,7 @@ export default {
     border: none;
     cursor: pointer;
     background-color: inherit;
+    transition: all 0.3s;
 }
 
 button {
@@ -84,7 +85,7 @@ button {
 }
 
 #dark-mode-button:active {
-    transform: scale(0.85);
+    transform: scale(0.8);
 }
 
 #dark-mode-button svg {

@@ -37,7 +37,6 @@ export const useUploadStore = defineStore('upload', {
                 name: file.name ?? `no-name-${this.id}`,
                 src: URL.createObjectURL(file),
             });
-            console.log(this.files)
         },
         remove(id) {
             for (let i = 0; i < this.files.length; i++) {
