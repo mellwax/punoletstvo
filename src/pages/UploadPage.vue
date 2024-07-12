@@ -57,7 +57,6 @@ export default {
     components: {UploadPreviewItem},
     data() {
         return {
-            status: 'selecting',
             lang: {
                 title: {
                     en: 'Share your memories with us!',
