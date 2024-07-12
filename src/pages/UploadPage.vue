@@ -1,6 +1,6 @@
 <template>
   <span class="page-title">
-    {{ this.lang.title[this.languageStore.selectedLanguage] }} 🥳
+    {{ lang.title[languageStore.selectedLanguage] }} 🥳
   </span>
 
   <form class="upload-form" id="upload-form" @submit.prevent="upload">
@@ -16,7 +16,7 @@
 
       <div class="upload-container-element">
       <span class="upload-text">
-        {{ this.lang.uploadText[this.languageStore.selectedLanguage] }}
+        {{ lang.uploadText[languageStore.selectedLanguage] }}
       </span>
       </div>
 
@@ -36,7 +36,7 @@
       </div>
 
       <button id="add-files-btn" @click="openUpload">
-        {{ this.lang.addButton[this.languageStore.selectedLanguage] }}
+        {{ lang.addButton[languageStore.selectedLanguage] }}
       </button>
     </div>
 

@@ -1,7 +1,8 @@
 <template>
   <div class="mv-background"
-       v-if="fullscreen"
+       v-show="fullscreen"
        @click="toggleFs"
+       ref="background"
   >
     <div class="arrow-container" @click.stop="moveLeft">
       <svg
@@ -42,15 +43,17 @@
               fill="#fff"/>
       </svg>
     </div>
+
+    <div class="media-count" v-if="fullscreen">
+      {{ current + 1 }} / {{ items.length }}
+    </div>
+
+    <div class="exit-fs" v-if="fullscreen" @click="toggleFs">
+      <span>&times;</span>
+    </div>
   </div>
 
-  <div class="media-count" v-if="fullscreen">
-    {{ current + 1 }} / {{ items.length }}
-  </div>
 
-  <div class="exit-fs" v-if="fullscreen" @click="toggleFs">
-    <span>&times;</span>
-  </div>
 
   <div class="mv-gallery">
     <div class="mv-media-wrapper"
@@ -79,8 +82,21 @@ export default {
         }
     },
     methods: {
-        toggleFs() {
-            this.fullscreen = !this.fullscreen;
+        async toggleFs() {
+            if (!this.fullscreen) {
+                this.fullscreen = !this.fullscreen;
+
+                await this.sleep(50);
+
+                this.$refs.background.classList.add('visible');
+            } else {
+                this.$refs.background.classList.remove('visible');
+
+                await this.sleep(300);
+
+                this.fullscreen = !this.fullscreen;
+            }
+
         },
         changeCurrent(index) {
             this.current = index % this.items.length;
@@ -103,6 +119,9 @@ export default {
                     item.thumb = '/thumb.png';
                 }
             }
+        },
+        sleep(time) {
+            return new Promise(resolve => setTimeout(resolve, time));
         }
     },
     watch: {
@@ -145,6 +164,13 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mv-background.visible {
+    opacity: 1;
 }
 
 .mv-fs-media {

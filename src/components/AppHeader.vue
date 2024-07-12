@@ -5,9 +5,6 @@
     </router-link>
 
     <nav>
-      <router-link to="/media-test" class="nav-elem">
-        Test
-      </router-link>
       <router-link to="/upload" class="nav-elem">
         Upload
       </router-link>
