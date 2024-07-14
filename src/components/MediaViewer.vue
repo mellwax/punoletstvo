@@ -30,6 +30,9 @@
           preload="auto"
           :src="items[current].src"
           :poster="items[current].thumb"
+          playsinline webkit-playsinline
+          autoplay
+          ref="video"
       >
       </video>
     </div>
@@ -144,6 +147,7 @@ export default {
                     break;
             }
         });
+
         this.addThumbnail();
     }
 }
