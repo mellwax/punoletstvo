@@ -51,7 +51,7 @@
       {{ current + 1 }} / {{ items.length }}
     </div>
 
-    <div class="exit-fs" v-if="fullscreen" @click="toggleFs">
+    <div class="exit-fs" v-if="fullscreen" @click.stop="toggleFs">
       <span>&times;</span>
     </div>
   </div>
@@ -86,6 +86,10 @@ export default {
     },
     methods: {
         async toggleFs() {
+            if (this.$refs.video) {
+                console.log('pause')
+                this.$refs.video.pause();
+            }
             if (!this.fullscreen) {
                 this.fullscreen = !this.fullscreen;
 
