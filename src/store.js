@@ -19,6 +19,7 @@ export const useLanguageStore = defineStore('language', {
 
             this.selectedLanguage = lang;
             localStorage.setItem('lang', lang);
+            document.querySelector('html').setAttribute('lang', lang);
         }
     }
 });
