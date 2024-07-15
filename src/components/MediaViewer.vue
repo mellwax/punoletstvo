@@ -111,9 +111,7 @@ export default {
         moveLeft() {
             if (!this.fullscreen) return;
 
-            if (this.current === 0) return this.current = this.items.length - 1;
-
-            this.current = this.current - 1;
+            this.current = (((this.current - 1) % this.items.length) + this.items.length) % this.items.length;
         },
         moveRight() {
             if (!this.fullscreen) return;
@@ -270,6 +268,7 @@ export default {
 
 .mv-gallery {
     width: 100%;
+    margin: 1rem 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, 300px);
     grid-gap: 50px;
