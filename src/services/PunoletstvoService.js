@@ -1,6 +1,6 @@
 //import axios from 'axios';
 /* eslint-disable */
-export const ANDIS_CLUB_BACKEND_URL = 'http://192.168.0.169:3001';
+export const ANDIS_CLUB_BACKEND_URL = 'https://europe-west8-ornate-exchange-429814-t9.cloudfunctions.net/upload-media';
 
 export async function getMedia() {
     const res = await fetch(ANDIS_CLUB_BACKEND_URL + '/media');
