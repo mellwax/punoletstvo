@@ -87,7 +87,6 @@ export default {
     methods: {
         async toggleFs() {
             if (this.$refs.video) {
-                console.log('pause')
                 this.$refs.video.pause();
             }
             if (!this.fullscreen) {
@@ -180,15 +179,19 @@ export default {
 }
 
 .mv-fs-media {
-    max-width: 1000px;
-    max-height: 800px;
+    width: 70%;
+    height: 70%;
     z-index: 1001;
     margin: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @media (max-width: 700px) {
     .mv-fs-media {
         width: 100%;
+        height: unset;
         margin: 0;
     }
 }
@@ -277,12 +280,20 @@ export default {
 }
 
 .mv-media-wrapper {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mv-media-wrapper img, .mv-media-wrapper video {
     max-width: 300px;
+    max-height: 300px;
 }
 
 img, video {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     box-shadow: 0 7px 15px 0 rgba(0, 0, 0, 0.5);
     transition: all 0.5s;
     cursor: pointer;

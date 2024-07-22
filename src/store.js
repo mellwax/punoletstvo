@@ -37,6 +37,7 @@ export const useUploadStore = defineStore('upload', {
                 id: this.contId++,
                 name: file.name ?? `no-name-${this.id}`,
                 src: URL.createObjectURL(file),
+                raw: file
             });
         },
         remove(id) {
@@ -46,6 +47,9 @@ export const useUploadStore = defineStore('upload', {
                     return;
                 }
             }
+        },
+        clearFiles() {
+            this.files = [];
         }
     }
 });

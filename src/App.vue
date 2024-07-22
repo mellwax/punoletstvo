@@ -34,7 +34,7 @@ export default {
 :root {
     --serif-font: Palatino, "Palatino Linotype", "URW Palladio L", serif;
     --light-color: #edf2f1;
-    --dark-color: #2e2a22ff;
+    --dark-color: rgb(46, 42, 34);
 }
 
 body {

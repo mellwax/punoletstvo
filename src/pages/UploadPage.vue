@@ -3,10 +3,26 @@
     {{ lang.title[languageStore.selectedLanguage] }} 🥳
   </span>
 
-  <form class="upload-form" id="upload-form" @submit.prevent="upload">
-    <input type="file" id="file-upload" accept="image/*, video/*" multiple style="display: none" @change="updateFiles">
+  <form
+      class="upload-form"
+      id="upload-form"
+      @submit.prevent
+  >
+    <input
+        type="file"
+        id="file-upload"
+        ref="fileUpload"
+        accept="image/*, video/*"
+        multiple
+        style="display: none"
+        @change="updateFiles"
+    >
 
-    <div class="upload-container" @click="openUpload" v-if="uploadStore.files.length === 0">
+    <div
+        class="upload-container"
+        @click="openUpload"
+        v-if="uploadStore.files.length === 0"
+    >
       <div class="upload-container-element">
         <svg fill="#000000" width="20%" height="20%" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -15,14 +31,33 @@
       </div>
 
       <div class="upload-container-element">
-      <span class="upload-text">
-        {{ lang.uploadText[languageStore.selectedLanguage] }}
-      </span>
-      </div>
+        <span
+            class="upload-text"
+            v-if="!status"
+        >
+          {{ lang.uploadText[languageStore.selectedLanguage] }}
+        </span>
 
+        <span
+            class="upload-text success-text"
+            v-if="status === 'success'"
+        >
+          {{ lang.successMsg[languageStore.selectedLanguage] }}
+        </span>
+
+        <span
+            class="upload-text error-text"
+            v-if="status === 'error'"
+        >
+          {{ lang.errorMsg[languageStore.selectedLanguage] }}
+        </span>
+      </div>
     </div>
 
-    <div class="upload-container display-container" v-if="uploadStore.files.length > 0">
+    <div
+        class="upload-container display-container"
+        v-if="uploadStore.files.length > 0"
+    >
 
       <div class="image-display">
         <upload-preview-item
@@ -35,12 +70,19 @@
 
       </div>
 
-      <button id="add-files-btn" @click="openUpload">
+      <button
+          id="add-files-btn"
+          @click.stop="openUpload"
+      >
         {{ lang.addButton[languageStore.selectedLanguage] }}
       </button>
     </div>
 
-    <button type="submit" id="upload-button" v-if="uploadStore.files.length > 0">
+    <button
+        id="upload-button"
+        v-if="uploadStore.files.length > 0"
+        @click="upload"
+    >
       Upload
     </button>
 
@@ -51,6 +93,7 @@
 import UploadPreviewItem from "@/components/UploadPreviewItem.vue";
 import {mapStores} from "pinia";
 import {useLanguageStore, useUploadStore} from "@/store";
+import {postMedia} from "@/services/PunoletstvoService";
 
 export default {
     name: 'UploadPage',
@@ -65,23 +108,47 @@ export default {
                 },
                 uploadText: {
                     en: 'Click here to upload your photos and videos!',
-                    de: 'Drück hier um deine Fotos und Videos hochzuladen!',
+                    de: 'Drücke hier um deine Fotos und Videos hochzuladen!',
                     rs: 'Pritisni ovde da bi podelio svoje slike i snimke!'
                 },
                 addButton: {
                     en: 'Add photos/videos',
                     de: 'Fotos/Videos hinzufügen',
                     rs: 'Dodaj slike/snimke'
+                },
+                successMsg: {
+                    en: 'Your photos/videos have been uploaded successfully!',
+                    de: 'Deine Fotos/Videos wurden erfolgreich hochgeladen!',
+                    rs: 'Tvoje slike/snimke su uspesno podeljeni!'
+                },
+                errorMsg: {
+                    en: 'There was an error while uploading your photos/videos.',
+                    de: 'Es ist ein Fehler während dem Hochladen deiner Fotos/Videos passiert.',
+                    rs: 'Dogodila nam se jedna greska tokom deljenja tvojih slika/snimka.'
                 }
-            }
+            },
+            status: null
         }
     },
     methods: {
         openUpload() {
-            document.getElementById('file-upload').click();
+            this.$refs.fileUpload.click();
         },
         upload() {
-            console.log('No upload yet :(');
+            postMedia(this.uploadStore.files)
+                .then(results => {
+                    for (const res of results) {
+                        if (!res.ok) console.error('error uploading', res);
+                    }
+
+                    console.log('successfully uploaded');
+                    this.uploadStore.clearFiles();
+                    this.status = 'success';
+                })
+                .catch(err => {
+                    console.error(err);
+                    this.status = 'error';
+                });
         },
         updateFiles() {
             if (!document) return;
@@ -175,6 +242,14 @@ form {
 .upload-text {
     text-align: center;
     padding: 2rem;
+}
+
+.success-text {
+    color: green;
+}
+
+.error-text {
+    color: red;
 }
 
 #upload-button {
