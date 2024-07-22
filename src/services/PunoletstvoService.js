@@ -3,7 +3,7 @@
 export const ANDIS_CLUB_BACKEND_URL = 'https://europe-west8-ornate-exchange-429814-t9.cloudfunctions.net/upload-media';
 
 export async function getMedia() {
-    const res = await fetch(ANDIS_CLUB_BACKEND_URL + '/media');
+    const res = await fetch(ANDIS_CLUB_BACKEND_URL);
 
     if (!res.ok) {
         return [];
@@ -20,7 +20,7 @@ export function postMedia(files) {
         const fd = new FormData();
         fd.append('file', file.raw);
 
-        const res = fetch(ANDIS_CLUB_BACKEND_URL + '/media', {
+        const res = fetch(ANDIS_CLUB_BACKEND_URL, {
             method: 'POST',
             body: fd
         });
